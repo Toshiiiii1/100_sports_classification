@@ -176,6 +176,7 @@ pyrightconfig.json
 
 # Data
 data/raw/
+data/preprocessed/
 
 # Models
 *.keras
