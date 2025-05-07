@@ -13,6 +13,6 @@ if __name__ == "__main__":
     img = keras.utils.load_img(path="data/test_images/basketball_test_1.jpg", target_size=(config.img_width, config.img_heigth))
     img = keras.utils.img_to_array(img)
     input_arr = np.array([img])
-    predicts = clf_model.predict(input_arr, verbose=0)
-    predicted_class = np.argmax(predicts, axis=1)
-    print(config.int2label[predicted_class[0]])
+    predicts = clf_model.predict(input_arr, verbose=0) # [1, 100]
+    predicted_class = np.argmax(predicts, axis=1)[0]
+    print(config.int2label[predicted_class])
