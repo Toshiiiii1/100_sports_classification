@@ -22,10 +22,13 @@ def parse_opt():
     return opt
 
 def predict(weight, source):
+    # load model
     clf_model = keras.models.load_model(weight)
-    img = keras.utils.load_img(path=source, target_size=(config.img_width, config.img_heigth))
+    # load an image
+    img = keras.utils.load_img(path=source, target_size=(config.img_width, config.img_heigth)) # PIL Image
+    # convert PIL Image to np array
     img = keras.utils.img_to_array(img)
-    input_arr = np.array([img])
+    input_arr = np.array([img]) # [1, 224, 224]
     predicts = clf_model.predict(input_arr, verbose=0) # [1, 100]
     predicted_class = np.argmax(predicts, axis=1)[0]
     print(f"Label of an image: {config.int2label[predicted_class]}")
