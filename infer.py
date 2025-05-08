@@ -2,20 +2,17 @@ import os
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 import keras
 import numpy as np
-import matplotlib.pyplot as plt
 import config
 import warnings
 warnings.filterwarnings("ignore")
 
 import argparse
 from pathlib import Path
-import sys
-from data import merge_data
 
 def parse_opt():
     # create an ArgumentParser object
     parser = argparse.ArgumentParser()
-    parser.add_argument("--weight", type=str, default="checkpoints/100_sport_clf.keras", help="model path(s)")
+    parser.add_argument("--weight", type=str, default="checkpoints/105_sport_clf.keras", help="model path(s)")
     parser.add_argument("--source", type=str, default="data/test_images", help="file/dir/URL/glob/screen/0(webcam)")
     opt = parser.parse_args()
     
