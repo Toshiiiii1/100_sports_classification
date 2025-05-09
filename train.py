@@ -3,12 +3,7 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 import keras
 import numpy as np
 from keras import layers
-from tensorflow import data as tf_data
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.metrics import confusion_matrix, classification_report
 from tensorflow.keras.applications import EfficientNetB0
-import pandas as pd
 from sklearn.utils import class_weight
 import argparse
 import config
@@ -27,13 +22,6 @@ def train(opt):
         
     val_ds = image_dataset_from_directory(
         opt.valid_path,
-        image_size=(opt.imgz, opt.imgz),
-        batch_size=opt.batch,
-        label_mode="categorical",
-    )
-        
-    test_ds = image_dataset_from_directory(
-        opt.test_path,
         image_size=(opt.imgz, opt.imgz),
         batch_size=opt.batch,
         label_mode="categorical",
@@ -134,7 +122,7 @@ def parse_opt():
     parser = argparse.ArgumentParser()
     
     parser.add_argument("--model", type=str, default=None, help="weights path")
-    parser.add_argument("--imgz", type=int, default=config.IMG_SIZE[0], help="number of epochs")
+    parser.add_argument("--imgz", type=int, default=config.IMG_SIZE[0], help="image size")
     parser.add_argument("--augmentation", action="store_true", help="whether apply augmentation or not")
     parser.add_argument("--epoch", type=int, default=30, help="number of epochs")
     parser.add_argument("--batch", type=int, default=32, help="batch size")
