@@ -1,6 +1,6 @@
 # 100+ sports image classification
 
-This model classifies images into one of 105 sports. It can support more sports in the future. The model was trained using two datasets: one with [100 sports](https://www.kaggle.com/datasets/gpiosenka/sports-classification) and another with [22 sports](https://www.kaggle.com/datasets/rishikeshkonapure/sports-image-dataset). It uses a pre-trained EfficientNetB0 model. The final model reached 98% accuracy and 98% F1 score.
+This model classifies images into one of 105 sports. It can support more sports in the future. The model was trained using two datasets: one with [100 sports](https://www.kaggle.com/datasets/gpiosenka/sports-classification) and another with [22 sports](https://www.kaggle.com/datasets/rishikeshkonapure/sports-image-dataset). It uses a pre-trained EfficientNetB0 model. The final model reached 98% accuracy, 98% F1 score and 132ms inference time on CPU.
 
 ## Dependecies
 
