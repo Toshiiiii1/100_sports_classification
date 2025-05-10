@@ -10,6 +10,8 @@ import config
 from keras.src.utils import image_dataset_from_directory
 import warnings
 warnings.filterwarnings("ignore")
+import time
+from tqdm import tqdm
     
 def parse_opt():
     # create an ArgumentParser object
@@ -32,6 +34,11 @@ def val(opt):
         label_mode="categorical",
     )
     
+    # get number of samples of test set
+    num_samples = 0
+    for batch in test_ds:
+        num_samples += batch[0].shape[0]
+    
     # load model
     clf_model = keras.models.load_model(opt.weight)
     
@@ -40,9 +47,11 @@ def val(opt):
     # create lists to store true labels and predictions
     y_true = []
     y_pred = []
+    
+    start_time = time.time()
 
     # iterate through the test dataset
-    for images, labels in test_ds:
+    for images, labels in tqdm(test_ds):
         # get predictions
         predictions = clf_model.predict(images, verbose=0)
         
@@ -52,17 +61,24 @@ def val(opt):
         y_true.extend(np.argmax(labels, axis=1))
         y_pred.extend(predicted_classes)
 
+    end_time = time.time()
+    
+    print(f"Avg inference time: {((end_time - start_time) * 1000)/num_samples}ms")
     # calculate confusion matrix
     cm = confusion_matrix(y_true, y_pred)
     
-    plt.figure(figsize=(20, 20))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=class_names, yticklabels=class_names)
+    # TODO: fix confusion matrix saving
+    
+    plt.figure(figsize=(10, 10))
+    sns.heatmap(cm, annot=False, fmt='d', cmap='Blues', xticklabels=class_names, yticklabels=class_names, square=True)
     plt.xlabel('Predicted')
     plt.ylabel('True')
+    plt.xticks(rotation=90, fontsize=6)
+    plt.yticks(fontsize=5)
     plt.title('Confusion Matrix')
     plt.show()
     
-    plt.savefig("cm.png")
+    # plt.savefig("cm.jpg", dpi=10000)
 
     print(classification_report(y_true, y_pred, target_names=class_names))
 
