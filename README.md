@@ -25,7 +25,7 @@ which python
 pip install -r requirements.txt
 
 # Download model
-python checkpoints/checkpoint_download.py
+python -m checkpoints.checkpoint_download
 ```
 
 #### Inference
@@ -69,4 +69,47 @@ test set/
 
 #### Merge old data with new data to transfer learning
 
-Upcomming
+```bash
+python data/merge_data.py --old-data old-data-path --ratio 0.8 --new-data new-data-path --save save-path
+```
+
+Old data structure:
+
+```
+train set/
+...class_a/
+......a_image_1.jpg
+......a_image_2.jpg
+...class_b/
+......b_image_1.jpg
+......b_image_2.jpg
+
+test set/
+...class_a/
+......a_image_1.jpg
+......a_image_2.jpg
+...class_b/
+......b_image_1.jpg
+......b_image_2.jpg
+
+...
+```
+
+New data structure:
+
+```
+class_a/
+......a_image_1.jpg
+......a_image_2.jpg
+class_b/
+......b_image_1.jpg
+......b_image_2.jpg
+class_c/
+......c_image_1.jpg
+......c_image_2.jpg
+class_c/
+......d_image_1.jpg
+......d_image_2.jpg
+
+...
+```
