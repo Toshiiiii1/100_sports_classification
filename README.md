@@ -30,7 +30,7 @@ python -m checkpoints.checkpoint_download
 
 #### Inference
 ```bash
-python infer.py --weight weight-path --source image-path
+python predict.py --weight weight-path --source image-path
 ```
 
 #### Validation
