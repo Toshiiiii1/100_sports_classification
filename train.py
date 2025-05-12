@@ -65,6 +65,8 @@ def train(opt):
     # mapping classes to its corespond weight
     class_weight_dict = dict(zip(classes, class_weights))
     
+    # TODO: add learning rate schedule and early stopping, maybe save model per epoch or save best model
+    
     # choose optimizer
     if opt.optimizer == "Adam":
         optimizer = keras.optimizers.Adam(learning_rate=opt.lr)
@@ -116,6 +118,8 @@ def train(opt):
         
     # train model
     hist = model.fit(train_ds, epochs=opt.epoch, validation_data=val_ds, class_weight=class_weight_dict)
+    
+    # TODO: create loss, accuracy during training chart
     
 def parse_opt():
     # create an ArgumentParser object
