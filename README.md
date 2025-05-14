@@ -33,6 +33,24 @@ python -m checkpoints.checkpoint_download
 python predict.py --weight weight-path --source image-path
 ```
 
+#### Inference with API
+```bash
+# run API
+python uvicorn api:app --port port --reload
+
+# send a POST request with an image
+curl -X POST -F "file=@path/to/your/image.jpg" https://your-api/predict
+```
+
+Repsone example:
+```
+{
+  "label": "basketball",
+  "confidence": 0.95,
+  "time": 0.045
+}
+```
+
 #### Validation
 
 ```bash
