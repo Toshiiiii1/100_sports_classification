@@ -5,6 +5,7 @@ import config
 import io
 from PIL import Image
 import numpy as np
+import time
 
 if __name__ == "__main__":
     # define model
@@ -18,6 +19,8 @@ if __name__ == "__main__":
         st.image(img)
         img_array = keras.utils.img_to_array(img)
         batch_img = np.array([img]) # [1, 224, 224]
+        start_time = time.time()
         predictions = clf_model.predict(batch_img) # [1, 100]
+        end_time = time.time()
         predict_class = np.argmax(predictions, axis=1)[0]
-        st.write(config.int2label[predict_class])
+        st.write(f"Label: {config.int2label[predict_class]}, inference time: {round((end_time - start_time) * 1000)}ms")
