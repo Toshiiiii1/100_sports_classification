@@ -1,6 +1,8 @@
 # 100+ sports image classification
 
-This model classifies images into one of 105 sports. It can support more sports in the future. The model was trained using two datasets: one with [100 sports](https://www.kaggle.com/datasets/gpiosenka/sports-classification) and another with [22 sports](https://www.kaggle.com/datasets/rishikeshkonapure/sports-image-dataset). It uses a pre-trained EfficientNetB0 model. The final model reached 98% accuracy, 98% F1 score and 132ms inference time on CPU.
+- This model classifies images into one of 105 sports. It can support more sports in the future.
+- The model was trained using two datasets: one with [100 sports](https://www.kaggle.com/datasets/gpiosenka/sports-classification) and another with [22 sports](https://www.kaggle.com/datasets/rishikeshkonapure/sports-image-dataset).
+- It uses a pre-trained EfficientNetB0 model. The final model reached 98% accuracy, 98% F1 score and 132ms/image inference time on CPU.
 
 ## Dependecies
 
@@ -63,7 +65,7 @@ python val.py --weight weight-path --data data-path --batch 32 --imgz 224
 python train.py --model model-path --epoch 10 --batch 64 --lr 1e-5 --n-classes 105 --train-path train-path --test-path test-path --valid-path valid-path
 ```
 
-Data structure:
+Dataset structure:
 
 ```
 train set/
@@ -91,7 +93,7 @@ test set/
 python data/merge_data.py --old-data old-data-path --ratio 0.8 --new-data new-data-path --save save-path
 ```
 
-Old data structure:
+Old dataset structure:
 
 ```
 train set/
@@ -113,7 +115,7 @@ test set/
 ...
 ```
 
-New data structure:
+New dataset structure:
 
 ```
 class_a/
