@@ -48,22 +48,25 @@ def val(opt):
     y_true = []
     y_pred = []
     
-    start_time = time.time()
+    total_time = 0
 
     # iterate through the test dataset
     for images, labels in tqdm(test_ds):
+        start_time = time.time()
         # get predictions
         predictions = clf_model.predict(images, verbose=0)
+        
+        end_time = time.time()
+        
+        total_time += (end_time - start_time) * 1000
         
         # convert predictions to class indices
         predicted_classes = np.argmax(predictions, axis=1)
         
         y_true.extend(np.argmax(labels, axis=1))
         y_pred.extend(predicted_classes)
-
-    end_time = time.time()
     
-    print(f"Avg inference time: {((end_time - start_time) * 1000)/num_samples}ms")
+    print(f"Avg inference time: {total_time/num_samples}ms")
     # calculate confusion matrix
     cm = confusion_matrix(y_true, y_pred)
     
@@ -76,7 +79,7 @@ def val(opt):
     plt.xticks(rotation=90, fontsize=6)
     plt.yticks(fontsize=5)
     plt.title('Confusion Matrix')
-    plt.show()
+    # plt.show()
     
     # plt.savefig("cm.jpg", dpi=10000)
 
