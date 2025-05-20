@@ -17,7 +17,7 @@ def parse_opt():
     # create an ArgumentParser object
     parser = argparse.ArgumentParser()
     
-    parser.add_argument("--weight", type=str, default="checkpoints/105_sport_clf.keras", help="model path(s)")
+    parser.add_argument("--weight", type=str, default=config.model_path, help="model path")
     parser.add_argument("--data", type=str, default="data/test_images", help="test folder")
     parser.add_argument("--batch", type=int, default=32, help="batch size")
     parser.add_argument("--imgz", type=int, default=config.IMG_SIZE[0], help="image size")

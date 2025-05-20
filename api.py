@@ -8,7 +8,7 @@ import keras
 import time
 
 app = FastAPI()
-clf_model = keras.saving.load_model("checkpoints/105_sport_clf.keras")
+clf_model = keras.saving.load_model(config.model_path)
 MAX_SIZE = 5 * 1024 * 1024
 
 # define API repsone schema

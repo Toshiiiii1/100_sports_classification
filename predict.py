@@ -12,7 +12,7 @@ from pathlib import Path
 def parse_opt():
     # create an ArgumentParser object
     parser = argparse.ArgumentParser()
-    parser.add_argument("--weight", type=str, default="checkpoints/105_sport_clf.keras", help="model path(s)")
+    parser.add_argument("--weight", type=str, default=config.model_path, help="model path")
     parser.add_argument("--source", type=str, default="data/test_images", help="file/dir/URL/glob/screen/0(webcam)")
     opt = parser.parse_args()
     
