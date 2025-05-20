@@ -9,6 +9,7 @@ import time
 
 app = FastAPI()
 clf_model = keras.saving.load_model("checkpoints/105_sport_clf.keras")
+MAX_SIZE = 5 * 1024 * 1024
 
 # define API repsone schema
 class PredictRepsone(BaseModel):
@@ -25,6 +26,10 @@ async def predict(file: UploadFile):
     # validate file type
     if not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="only except image file (png/jpg)")
+
+    # check file size
+    if file.size > MAX_SIZE:
+        raise HTTPException(status_code=413, detail="uploaded file too large (limit: 5MB)")
     
     # read image as bytes type
     img_bytes = io.BytesIO(await file.read())
@@ -48,6 +53,6 @@ async def predict(file: UploadFile):
     
     return PredictRepsone(
         label=label,
-        confidence=float(label_prob),
-        time=infer_time,
+        confidence=round(float(label_prob), 3),
+        time=round(infer_time, 3),
     )
