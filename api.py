@@ -17,8 +17,8 @@ class PredictRepsone(BaseModel):
     confidence: float
     time: float
 
-@app.get("/")
-async def root():
+@app.get("/healthcheck")
+async def healthcheck():
     return {"message": "API works"}
 
 @app.post("/predict")
@@ -26,13 +26,13 @@ async def predict(file: UploadFile):
     # validate file type
     if not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="only except image file (png/jpg)")
-
-    # check file size
-    if file.size > MAX_SIZE:
-        raise HTTPException(status_code=413, detail="uploaded file too large (limit: 5MB)")
     
+    # check file size
+    file_bytes = await file.read()
+    if len(file_bytes) > MAX_SIZE:
+        raise HTTPException(status_code=413, detail="uploaded file too large (limit: 5MB)")
     # read image as bytes type
-    img_bytes = io.BytesIO(await file.read())
+    img_bytes = io.BytesIO(file_bytes)
     # convert image bytes type to np array
     image = Image.open(img_bytes).resize((config.img_width, config.img_heigth))
     img_array = keras.utils.img_to_array(image)
