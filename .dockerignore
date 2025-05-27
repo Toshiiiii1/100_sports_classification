@@ -1,0 +1,23 @@
+# virtual envs
+venv/
+.venv/
+100sports_vm/
+
+# datasets
+data/raw/
+data/preprocessed/
+
+# caches & compiled stuff
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+
+# git & editor junk
+.git/
+.gitignore
+.dockerignore
+.vscode/
+.gitattributes
+Dockerfile
