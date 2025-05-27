@@ -76,13 +76,13 @@ pydantic_core==2.33.2
 pydeck==0.9.1
 Pygments==2.19.1
 pyparsing==3.2.3
-pypiwin32==223
+pypiwin32==223;sys_platform == 'win32'
 PySocks==1.7.1
 pytest==8.3.5
 python-dateutil==2.9.0.post0
 python-multipart==0.0.20
 pytz==2025.2
-pywin32==310
+pywin32==310;sys_platform == 'win32'
 pyzmq==26.4.0
 referencing==0.36.2
 requests==2.32.3
