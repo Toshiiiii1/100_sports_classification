@@ -3,6 +3,7 @@ setup:
 	source venv/Scripts/activate
 
 install:
+	python -m pip install --upgrade pip
 	pip install -r requirements.txt # Install python dependecies 
 	python -m checkpoints.checkpoint_download # Install pre-trained model
 
